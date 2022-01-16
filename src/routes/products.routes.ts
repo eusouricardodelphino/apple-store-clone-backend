@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 
@@ -11,6 +12,24 @@ productsRouter.get('/', async (request, response) => {
   const products = await productsRepository.find();
 
   return response.json(products);
+});
+
+productsRouter.get('/:id', async (request, response) => {
+  try {
+    const productRepository = getRepository(Product);
+
+    const { id } = request.params;
+
+    const product = await productRepository.findOne({ where: { id } });
+
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    return response.status(200).json(product);
+  } catch (err: any) {
+    return response.status(404).json({ error: err.message });
+  }
 });
 
 productsRouter.post('/', async (request, response) => {
@@ -27,6 +46,36 @@ productsRouter.post('/', async (request, response) => {
     return response.json(product);
   } catch (err: any) {
     return response.status(400).json({ error: err.message });
+  }
+});
+
+productsRouter.put('/:id', async (request, response) => {
+  try {
+    const productRepository = getRepository(Product);
+
+    const { id } = request.params;
+
+    const product = await productRepository.findOne({ where: { id } });
+
+    const { name, price } = request.body;
+
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    if (product && name) {
+      product.name = name;
+    }
+
+    if (product && price) {
+      product.price = price;
+    }
+
+    await productRepository.update(id, product);
+
+    return response.json(product);
+  } catch (err: any) {
+    return response.status(404).json({ error: err.message });
   }
 });
 
