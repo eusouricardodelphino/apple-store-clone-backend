@@ -16,6 +16,7 @@ Aqui vou descrever um pouco das tecnologias que usei e das dependências necess�
 - Database: SQLite3 v3.36.0
 - ORM: TypeORM v0.2.41
 - Express v4.17.2
+
 Da lista acima, é necessário instalar apenas o SQLite, o Node e, caso você queira, o Yarn mas esse último não é necessário.
 Tenha a certeza de ter todas as dependências instaladas.
 
