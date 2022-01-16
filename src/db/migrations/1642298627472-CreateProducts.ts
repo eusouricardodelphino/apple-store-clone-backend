@@ -8,8 +8,9 @@ export default class CreateProducts1642298627472 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer',
             isPrimary: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'name',
