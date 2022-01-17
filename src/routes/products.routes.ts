@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
+import multer from 'multer';
 
+import uploadConfig from '../config/upload';
 import Product from '../models/Product';
 import CreateProductRepository from '../services/CreateProductService';
+import UpdateProductImageService from '../services/UpdateProductImageService';
 
 const productsRouter = Router();
+const upload = multer(uploadConfig);
 
 productsRouter.get('/', async (request, response) => {
   const productsRepository = getRepository(Product);
@@ -78,6 +82,25 @@ productsRouter.put('/:id', async (request, response) => {
     return response.status(404).json({ error: err.message });
   }
 });
+
+productsRouter.patch(
+  '/:id/image',
+  upload.single('product_img'),
+  async (request, response) => {
+    try {
+      const updateProductImage = new UpdateProductImageService();
+
+      const product = await updateProductImage.execute({
+        product_id: request.params.id,
+        productFileName: request.file.filename,
+      });
+
+      return response.json(product);
+    } catch (err: any) {
+      return response.status(400).json({ error: err.message });
+    }
+  },
+);
 
 productsRouter.delete('/:id', async (request, response) => {
   try {
