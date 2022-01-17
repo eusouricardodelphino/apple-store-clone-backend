@@ -1,2 +1,4 @@
 node_modules
 src/db/database.sql
+tmp/*
+!tmp/.gitkeep
