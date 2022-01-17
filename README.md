@@ -22,4 +22,7 @@ Tenha a certeza de ter todas as dependências instaladas.
 
 Faça o clone do projeto para o ambiente local e rode o comando yarn ou npm install, dependendo do seu gerenciador de dependências.
 
-Para rodar o projeto, use o comando yarn dev:server ou npm run dev:server, dependendo do seu gerenciador de dependências.
+Para rodar o projeto, use os comandos:
+- yarn - Esse comando instala as dependências do projeto.
+- yarn typeorm migration:run - Esse comando constrói a base de dados no seu local.
+- yarn dev:server - Esse comando executa o projeto na porta 3333.
