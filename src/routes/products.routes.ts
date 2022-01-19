@@ -38,13 +38,14 @@ productsRouter.get('/:id', async (request, response) => {
 
 productsRouter.post('/', async (request, response) => {
   try {
-    const { name, price } = request.body;
+    const { name, price, description } = request.body;
 
     const createProduct = new CreateProductRepository();
 
     const product = await createProduct.execute({
       name,
       price,
+      description,
     });
 
     return response.json(product);
@@ -61,7 +62,7 @@ productsRouter.put('/:id', async (request, response) => {
 
     const product = await productRepository.findOne({ where: { id } });
 
-    const { name, price } = request.body;
+    const { name, price, description } = request.body;
 
     if (!product) {
       throw new Error('Product not found');
@@ -73,6 +74,10 @@ productsRouter.put('/:id', async (request, response) => {
 
     if (product && price) {
       product.price = price;
+    }
+
+    if (product && description) {
+      product.description = description;
     }
 
     await productRepository.update(id, product);
