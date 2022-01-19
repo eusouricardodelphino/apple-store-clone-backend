@@ -13,6 +13,9 @@ class Product {
 
   @Column()
   image: string;
+
+  @Column('text')
+  description: string;
 }
 
 export default Product;
