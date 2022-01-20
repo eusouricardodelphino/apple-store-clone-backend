@@ -95,12 +95,15 @@ productsRouter.patch(
     try {
       const updateProductImage = new UpdateProductImageService();
 
-      const product = await updateProductImage.execute({
-        product_id: request.params.id,
-        productFileName: request.file.filename,
-      });
+      if (request.file) {
+        const product = await updateProductImage.execute({
+          product_id: request.params.id,
+          productFileName: request.file.filename,
+        });
 
-      return response.json(product);
+        return response.json(product);
+      }
+      throw new Error('file not found');
     } catch (err: any) {
       return response.status(400).json({ error: err.message });
     }
