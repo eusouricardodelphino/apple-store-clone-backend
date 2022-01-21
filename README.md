@@ -4,7 +4,7 @@ Este é um aplicativo de exemplo feito para um teste de uma vaga de emprego.
 
 Eu construi uma API com um CRUD simples de uma lista de produtos para servir um front end que pode ser encontrado:
 
-[https://github.com/ridelphino/apple-store-clone-frontend](https://github.com/ridelphino/apple-store-clone-frontend)].
+[https://github.com/ridelphino/apple-store-clone-frontend](https://github.com/ridelphino/apple-store-clone-frontend).
 
 ## Tecnologias e Dependências.
 
